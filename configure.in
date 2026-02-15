@@ -2494,6 +2494,15 @@ case "$host" in
             have_timers=yes
         fi
         ;;
+    *-*-helenos*)
+        ARCH=helenos
+        CheckDummyVideo
+        CheckDiskAudio
+        CheckDummyAudio
+        # CheckNASM
+        CheckDLOPEN
+        CheckPTHREAD
+        ;;
     *-*-cygwin* | *-*-mingw32*)
         ARCH=win32
         if test "$build" != "$host"; then # cross-compiling
