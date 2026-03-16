@@ -1646,6 +1646,20 @@ AC_HELP_STRING([--enable-video-dummy], [use dummy video driver [[default=yes]]])
     fi
 }
 
+dnl Set up the HelenOS video driver.
+CheckHelenOSVideo()
+{
+    echo "Checking HelenOS video"
+    AC_ARG_ENABLE(video-helenos,
+AC_HELP_STRING([--enable-video-helenos], [use HelenOS video driver [[default=yes]]]),
+                  , enable_video_helenos=yes)
+    if test x$enable_video_helenos = xyes; then
+        AC_DEFINE(SDL_VIDEO_DRIVER_HELENOS)
+        SOURCES="$SOURCES $srcdir/src/video/helenos/*.c"
+        have_video=yes
+    fi
+}
+
 dnl Check to see if OpenGL support is desired
 AC_ARG_ENABLE(video-opengl,
 AC_HELP_STRING([--enable-video-opengl], [include OpenGL context creation [[default=yes]]]),
@@ -2496,6 +2510,7 @@ case "$host" in
         ;;
     *-*-helenos*)
         ARCH=helenos
+        CheckHelenOSVideo
         CheckDummyVideo
         CheckDiskAudio
         CheckDummyAudio

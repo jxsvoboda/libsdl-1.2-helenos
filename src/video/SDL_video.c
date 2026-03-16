@@ -117,6 +117,9 @@ static VideoBootStrap *bootstrap[] = {
 #if SDL_VIDEO_DRIVER_RISCOS
 	&RISCOS_bootstrap,
 #endif
+#if SDL_VIDEO_DRIVER_HELENOS
+	&UI_bootstrap,
+#endif
 #if SDL_VIDEO_DRIVER_OS2FS
 	&OS2FSLib_bootstrap,
 #endif
@@ -143,7 +146,6 @@ static SDL_GrabMode SDL_WM_GrabInputOff(void);
 #if SDL_VIDEO_OPENGL
 static int lock_count = 0;
 #endif
-
 
 /*
  * Initialize the video and event subsystems -- determine native pixel format
